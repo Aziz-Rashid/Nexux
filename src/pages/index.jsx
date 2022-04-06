@@ -72,7 +72,7 @@ const Home = ({ data }) => {
                         products: productData,
                     }}
                 />
-                <CollectionArea
+                <CollectionArea 
                     data={{
                         ...content["collection-section"],
                         collections: collectionsData.slice(0, 4),

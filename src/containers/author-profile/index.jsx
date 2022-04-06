@@ -21,7 +21,7 @@ const AuthorProfileArea = ({ className, data }) => {
     const useraddress = user != null && user.get("ethAddress");
     useEffect(() => {
         if (isAuthenticated) {
-            const options = { chain: "matic", address: useraddress };
+            const options = { chain: "eth", address: useraddress };
             Moralis.Web3API.account.getNFTs(options).then((data) => {
                 let gear = data.result;
                 setValue(gear);
