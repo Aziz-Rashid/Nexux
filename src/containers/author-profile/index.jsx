@@ -21,7 +21,7 @@ const AuthorProfileArea = ({ className, data }) => {
     const useraddress = user != null && user.get("ethAddress");
     useEffect(() => {
         if (isAuthenticated) {
-            const options = { chain: "eth", address: useraddress };
+            const options = { address: useraddress };
             Moralis.Web3API.account.getNFTs(options).then((data) => {
                 let gear = data.result;
                 setValue(gear);
@@ -29,9 +29,13 @@ const AuthorProfileArea = ({ className, data }) => {
         }
     }, [isAuthenticated, Moralis]);
     const newdata2 = value.map((el) => JSON.parse(el.metadata));
-    const newdata = newdata2?.filter((el) =>
-        el?.title != null ? true : false
-    );
+    // const newdata = newdata2?.filter((el) =>
+    //     el?.title != null ? true : false
+    // );
+    const { data: NFTBalances } = useNFTBalances();
+    const newdata = NFTBalances?.result;
+    console.log(newdata)
+    
     return (
         <div className={clsx("rn-authore-profile-area", className)}>
             <TabContainer defaultActiveKey="nav-profile">
@@ -111,15 +115,15 @@ const AuthorProfileArea = ({ className, data }) => {
                                         <Product
                                             overlay
                                             placeBid
-                                            title={prod.title}
-                                            slug={prod.slug}
-                                            latestBid={prod.latestBid}
-                                            price={prod.price}
-                                            likeCount={prod.likeCount}
-                                            auction_date={prod.auction_date}
-                                            image={prod.image}
-                                            authors={prod.authors}
-                                            bitCount={prod.bitCount}
+                                            title={prod?.metadata?.title}
+                                            slug={prod?.metadata?.slug}
+                                            latestBid={prod?.metadata?.latestBid}
+                                            price={prod?.metadata?.price}
+                                            likeCount={prod?.metadata?.likeCount}
+                                            auction_date={prod?.metadata?.auction_date}
+                                            image={prod?.metadata?.image}
+                                            authors={prod?.metadata?.authors}
+                                            bitCount={prod?.metadata?.bitCount}
                                         />
                                     </div>
                                 );
