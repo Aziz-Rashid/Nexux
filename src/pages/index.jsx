@@ -18,7 +18,7 @@ import sellerData from "../data/sellers.json";
 import collectionsData from "../data/collections.json";
 
 export async function getStaticProps() {
-    const res = await fetch(`https://kakdsa.herokuapp.com/api/banners`);
+    const res = await fetch(`https://strapine.herokuapp.com/api/banners`);
     const data = await res.json();
     return {
         props: { data, className: "template-color-1" },
